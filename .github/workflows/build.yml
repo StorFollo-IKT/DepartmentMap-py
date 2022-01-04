@@ -9,12 +9,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        org: [ 'SFIKT', 'AK' ]
+        org: [ 'TEST' ]
         include:
-          - org: 'SFIKT'
-            path_key: PATH_SFIKT
-          - org: 'AK'
-            path_key: PATH_AK
+          - org: 'TEST'
+            path_key: PATH_TEST
 
     steps:
       - uses: actions/checkout@v2
@@ -45,3 +43,9 @@ jobs:
         with:
           name: DepartmentMap-py
           path: ${{ github.workspace }}/dist
+
+      - uses: actions/upload-artifact@v2
+        name: Upload source
+        with:
+          name: DepartmentMap-py-source
+          path: ${{ github.workspace }}
