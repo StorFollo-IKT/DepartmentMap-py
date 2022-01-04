@@ -12,9 +12,9 @@ jobs:
         org: [ 'SFIKT', 'AK' ]
         include:
           - org: 'SFIKT'
-            path_key = PATH_SFIKT
+            path_key: PATH_SFIKT
           - org: 'AK'
-            path_key = PATH_AK
+            path_key: PATH_AK
 
     steps:
       - uses: actions/checkout@v2
