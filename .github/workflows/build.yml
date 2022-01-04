@@ -35,7 +35,7 @@ jobs:
 
       - name: Write path file
         shell: cmd
-        run: echo path=${{ secrets[matrix.path_key] }}>${{ github.workspace }}\path.py
+        run: echo path="${{ secrets[matrix.path_key] }}">${{ github.workspace }}\path.py
 
       - name: Build
         run: python -m PyInstaller -F -n DepartmentMap-${{ matrix.org }} map.py
