@@ -33,7 +33,7 @@ jobs:
 
       - name: Write path file
         shell: cmd
-        run: echo path=${{ secrets[matrix.path_key] }}>${{ github.workspace }}\path.py
+        run: echo path="${{ secrets[matrix.path_key] }}">${{ github.workspace }}\path.py
 
       - name: Cat path.py
         shell: bash
