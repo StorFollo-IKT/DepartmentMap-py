@@ -35,6 +35,10 @@ jobs:
         shell: cmd
         run: echo path=${{ secrets[matrix.path_key] }}>${{ github.workspace }}\path.py
 
+      - name: Cat path.py
+        shell: bash
+        run: cat path.py
+
       - name: Build
         run: python -m PyInstaller -F -n DepartmentMap-${{ matrix.org }} map.py
 
