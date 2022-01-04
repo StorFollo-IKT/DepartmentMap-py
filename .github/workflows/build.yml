@@ -1,0 +1,45 @@
+name: Build exe file
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        org: [ 'SFIKT', 'AK' ]
+        include:
+          - org: 'SFIKT'
+            path_key = PATH_SFIKT
+          - org: 'AK'
+            path_key = PATH_AK
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+
+      - uses: actions/cache@v2
+        name: Cache python environment
+        with:
+          path: ${{ env.pythonLocation }}
+          key: ${{ env.pythonLocation }}-${{ hashFiles('requirements.txt') }}-${{ hashFiles('requirements_dev.txt') }}
+
+      - name: Install requirements
+        run: python -m pip install -r requirements.txt
+
+      - name: Write path file
+        shell: cmd
+        run: echo ${{ secrets[matrix.path_key] }}>path.py
+
+      - name: Build
+        run: python -m pyinstaller -F -n DepartmentMap-${{ matrix.org }} map.py
+
+      - uses: actions/upload-artifact@v2
+        name: Upload
+        with:
+          name: DepartmentMap-py
+          path: ${{ github.workspace }}/dist
