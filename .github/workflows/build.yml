@@ -9,10 +9,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        org: [ 'SFIKT', 'AK' ]
+        org: [ 'SFIKT_AK', 'SFIKT_FK', 'AK' ]
         include:
-          - org: 'SFIKT'
+          - org: 'SFIKT_AK'
             path_key: PATH_SFIKT
+          - org: 'SFIKT_FK'
+            path_key: PATH_SFIKT_FK
           - org: 'AK'
             path_key: PATH_AK
 
