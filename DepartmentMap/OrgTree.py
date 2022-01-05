@@ -8,10 +8,10 @@ class OrgTree:
 
     def __init__(self, file):
         tree = ElementTree.parse(file)
-        self.root = tree.getroot()
+        self.root = tree.getroot().find('Organisations')
 
     def get_root(self, key='900000'):
-        org = TreeOrganisation(self.root.find('Organisations/Organisation/Id[.="%s"]/..' % key),
+        org = TreeOrganisation(self.root.find('Organisation/Id[.="%s"]/..' % key),
                                self.root)
         return org
 
@@ -24,5 +24,5 @@ class TreeOrganisation(Organisation):
         self.root = root
 
     def children(self):
-        elements = self.root.findall('Organisations/Organisation/ParentId[.="%s"]/..' % self.id)
+        elements = self.root.findall('Organisation/ParentId[.="%s"]/..' % self.id)
         return map(lambda element: TreeOrganisation(element, self.root), elements)
