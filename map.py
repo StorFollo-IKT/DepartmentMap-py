@@ -1,6 +1,6 @@
 import wx
 
-from DepartmentMap import DepartmentMapFrame, OrgTree, TreeOrganisation
+from DepartmentMap import DepartmentMapFrameExtension, OrgTree, TreeOrganisation
 
 try:
     from path import path
@@ -13,10 +13,9 @@ print('Tree loaded')
 
 app = wx.App(False)
 
-frame = DepartmentMapFrame(None)
+frame = DepartmentMapFrameExtension(None)
 org_root = tree.get_root()
 gui_root = frame.orgTree.AddRoot('%s (%s)' % (org_root.name, org_root.id))
-frame.orgTree.Expand(gui_root)
 
 
 def add_children(org_parent: TreeOrganisation, gui_parent):
@@ -28,6 +27,7 @@ def add_children(org_parent: TreeOrganisation, gui_parent):
 print('Add children')
 add_children(org_root, gui_root)
 print('Children added')
+frame.orgTree.Expand(gui_root)
 
 # show the frame
 frame.Show(True)
