@@ -44,7 +44,7 @@ jobs:
         run: sed -i 's=\\=\\\\=g' path.py
 
       - name: Build
-        run: python -m PyInstaller -F -n DepartmentMap-${{ matrix.org }} map.py
+        run: python -m PyInstaller --noconsole -F -n DepartmentMap-${{ matrix.org }} map.py
 
       - uses: actions/upload-artifact@v2
         name: Upload
