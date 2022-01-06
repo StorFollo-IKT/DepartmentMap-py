@@ -10,7 +10,6 @@
 import wx
 import wx.xrc
 
-
 ###########################################################################
 ## Class DepartmentMapFrame
 ###########################################################################
@@ -62,3 +61,36 @@ class DepartmentMapFrame(wx.Frame):
 
     def collapseAll(self, event):
         event.Skip()
+
+
+###########################################################################
+## Class LoadingFrame
+###########################################################################
+
+class LoadingFrame(wx.Frame):
+
+    def __init__(self, parent):
+        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"Laster data", pos=wx.DefaultPosition,
+                          size=wx.Size(500, 300), style=wx.DEFAULT_FRAME_STYLE | wx.TAB_TRAVERSAL)
+
+        self.SetSizeHints(wx.DefaultSize, wx.DefaultSize)
+
+        bSizer2 = wx.BoxSizer(wx.VERTICAL)
+
+        self.loadingText = wx.StaticText(self, wx.ID_ANY, u"Laster data", wx.DefaultPosition,
+                                         wx.DefaultSize, 0)
+        self.loadingText.Wrap(-1)
+
+        self.loadingText.SetFont(
+            wx.Font(20, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False,
+                    wx.EmptyString))
+
+        bSizer2.Add(self.loadingText, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5)
+
+        self.SetSizer(bSizer2)
+        self.Layout()
+
+        self.Centre(wx.BOTH)
+
+    def __del__(self):
+        pass
